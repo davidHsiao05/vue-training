@@ -43,8 +43,8 @@ const app = createApp({
         })
      },
      del(p){
-        // /v2/api/{api_path}/admin/product/{id}
         axios.delete(`${this.api}/api/${this.path}/admin/product/${p.id}`).then((res)=>{
+            window.location="product.html"
             console.log(res);
         })
         .catch((err)=>{
