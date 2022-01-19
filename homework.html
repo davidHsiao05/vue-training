@@ -41,7 +41,7 @@
                     <td width="120">
                       {{product.price}}
                     </td>
-                    <td width="150">
+                    <td width="150" @click="crrentOpen(product)">
                       <span v-if="product.is_enabled==1" class="text-success">啟用</span>
                       <span v-else>未啟用</span>
                     </td>
@@ -72,7 +72,7 @@
                     </div>
                   </div>
                 </div>
-                <template v-for="(currentimgs, index) in currentproduct.imagesUrl" :key="currentimgs.id">
+                <template v-for="(currentimgs, index) in currentproduct.imagesUrl" :key="index">
                   <img :src="currentimgs" alt="" class="images m-2">
                 </template>
               </template>
@@ -87,6 +87,7 @@
         const app = createApp({
           data(){
             return{
+              isOpen:true,
               currentproduct:null,
               products: [
                 {
@@ -141,7 +142,18 @@
                 }
               ]
             }
-          }
+          },
+          methods: {
+            crrentOpen(i){
+              console.log(i)
+              if(i.is_enabled == 1){
+                i.is_enabled = 16;
+              }else{
+                i.is_enabled =  1;
+              }
+            }
+          },
+          
         });
         app.mount('#app');
 
