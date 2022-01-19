@@ -18,7 +18,7 @@ const app = createApp({
             // console.log(res.data)
             const{ token,expired } = res.data;
             document.cookie = `davidToken=${token};expires=${new Date(expired)}`;
-            window.location = 'products.html'
+            window.location = 'product.html'
           })
           .catch((err)=>{
             console.dir(err);
