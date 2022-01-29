@@ -1,0 +1,94 @@
+*{
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+.fade-enter{
+    transform: translateY(100%);
+}
+.fade-leave-to{
+    transform: translateY(-100%);
+}
+.fade-enter-active,
+.fade-leave-active{
+    transition: top 0.5s;
+}
+
+.container{
+    border: 1px red solid;
+    max-width: 1200px;
+    margin: auto;
+}
+.slot{
+    width: 50%;
+    height: 600px;
+    border: rgb(255, 0, 157) 5px solid;
+    margin: auto;
+    display: flex;
+    align-items: center;
+}
+.num{
+    position: relative;
+    width: 20%;
+    height: 50px;
+    box-sizing: border-box;
+    border: solid 1px blue;
+    /* overflow: hidden; */
+}
+ul{
+    height: 100%;
+}
+.num li{
+    text-align: center;
+    height: 100%;
+    border: 1px solid red;
+    /* animation-name:slotmove;
+    animation-duration: 1.5s;
+    animation-timing-function:ease-in-out;
+    animation-iteration-count: infinite;
+    position: relative; */
+}
+.arr{
+    margin-left: 30px;
+    /* display: flex; */
+}
+.arr div{
+    transform: rotate(90deg);
+    padding-bottom: 30px;
+}
+
+@keyframes slotmove{
+    /* 0%{
+        transform: translateY(0%);
+    }
+    10%{
+        transform: translateY(-100%);
+    }
+    20%{
+        transform: translateY(-200%);
+    }
+    30%{
+        transform: translateY(-300%);
+    }
+    40%{
+        transform: translateY(-400%);
+    }
+    50%{
+        transform: translateY(-500%);
+    }
+    60%{
+        transform: translateY(-600%);
+    }
+    70%{
+        transform: translateY(-700%);
+    }
+    80%{
+        transform: translateY(-800%);
+    }
+    90%{
+        transform: translateY(-900%);
+    } */
+    100%{
+        transform: translateY(-900%);
+    }
+}

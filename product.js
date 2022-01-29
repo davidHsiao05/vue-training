@@ -12,7 +12,9 @@ const app = createApp({
         api:"https://vue3-course-api.hexschool.io/v2",
         path:'david19921005',
         mytoken:'',
-        myProducts:[],    
+        myProducts:{
+            products:[],
+        },    
     }
   },
   methods: {

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"> -->
+    <link rel="stylesheet" href="./slot.css">
+</head>
+<body>
+    <div id="app">
+        <div class="slot">
+            <div class="num">
+                <ul>
+                    <li class="numli"
+                    v-for="(item, i) in nums"
+                    :key="i"
+                    :style="currentnum"
+                    >
+                    {{item.num}}
+                    </li>
+                </ul>
+            </div>
+            <div class="arr">
+                <div @click="slide(+1)"><</div>
+                <div @click="slotstar">></div>
+                <div @click="close">close</div>
+            </div>
+        </div>
+    </div>
+    
+
+    
+    <script type="module" src="./slot.js"></script>
+</body>
+
+</html>
