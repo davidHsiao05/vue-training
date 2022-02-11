@@ -68,11 +68,19 @@
             </tr>
           </tbody>
         </table>
+        <pagination :pages="pagination" @get-data="getData"></pagination>
       </div>
       <!-- Modal -->
       <div id="productModal" ref="productModal" class="modal fade" tabindex="-1" aria-labelledby="productModalLabel"
            aria-hidden="true">
-        <div class="modal-dialog modal-xl">
+        <productmodal
+        :current-product="currentProduct"
+        :state-toggle="stateToggle"
+        :api="api"
+        :path="path"
+        @emit-data="getData"
+        @emit-close="modelClose"></productmodal>
+        <!-- <div class="modal-dialog modal-xl">
           <div class="modal-content border-0">
             <div class="modal-header bg-dark text-white">
               <h5 id="productModalLabel" class="modal-title">
@@ -182,7 +190,7 @@
               </button>
             </div>
           </div>
-        </div>
+        </div> -->
       </div>
       <div id="delProductModal" ref="delProductModal" class="modal fade" tabindex="-1"
            aria-labelledby="delProductModalLabel" aria-hidden="true">
@@ -222,7 +230,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js"
             integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc"
             crossorigin="anonymous"></script>
-            <script type="module" src="./productapi.js"></script>
+            <script type="module" src="./productapi-week4.js"></script>
 
   </body>
 

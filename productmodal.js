@@ -1,78 +1,30 @@
-<!DOCTYPE html>
-<html lang="zh-Hant-TW">
-
-  <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
-
-  </head>
-
-  <body>
-    <div id="app">
-      <div class="container">
-        <div class="text-end mt-4">
-          <button class="btn btn-primary"
-          @click="addProduct">
-            建立新的產品
-          </button>
-        </div>
-        <table class="table mt-4">
-          <thead>
-            <tr>
-              <th width="120">
-                分類
-              </th>
-              <th>產品名稱</th>
-              <th width="120">
-                原價
-              </th>
-              <th width="120">
-                售價
-              </th>
-              <th width="100">
-                是否啟用
-              </th>
-              <th width="120">
-                編輯
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="(product, i) in myProducts.products" :key="product.id">
-              <td>{{product.category}}</td>
-              <td>{{product.title}}</td>
-              <td class="text-end">{{product.price}}</td>
-              <td class="text-end">{{product.origin_price}}</td>
-              <td>
-                <span v-if="product.is_enabled" class="text-success">啟用</span>
-                <span v-else>未啟用</span>
-              </td>
-              <td>
-                <div class="btn-group">
-                  <button type="button"
-                  class="btn btn-outline-primary btn-sm"
-                  @click="edit(product)"
-                  >
-                    編輯
-                  </button>
-                  <button type="button" class="btn btn-outline-danger btn-sm"
-                  @click="ifdel(product)">
-                    刪除
-                  </button>
-                </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <!-- Modal -->
-      <div id="productModal" ref="productModal" class="modal fade" tabindex="-1" aria-labelledby="productModalLabel"
-           aria-hidden="true">
-        <div class="modal-dialog modal-xl">
+export default {
+    props:['stateToggle','currentProduct','api','path'],
+    methods: {
+        updateData(){
+            if(this.stateToggle == 'edit'){
+              axios.put(`${this.api}/api/${this.path}/admin/product/${this.currentProduct.id}`,{data:this.currentProduct}).then((res)=>{
+                this.$emit("emitData");
+                // productModal.hide()會跳錯誤訊息;
+                this.$emit("emitClose");
+                
+            })
+            .catch((err)=>{
+              console.dir(err);
+            })
+          }else if(this.stateToggle == 'add'){
+            axios.post(`${this.api}/api/${this.path}/admin/product`,{data:this.currentProduct}).then((res)=>{
+              this.$emit("emitData");
+              this.$emit("emitClose");
+          })
+          .catch((err)=>{
+            console.dir(err);
+          })
+          }
+          },
+    },
+    template:`
+    <div class="modal-dialog modal-xl">
           <div class="modal-content border-0">
             <div class="modal-header bg-dark text-white">
               <h5 id="productModalLabel" class="modal-title">
@@ -183,47 +135,5 @@
             </div>
           </div>
         </div>
-      </div>
-      <div id="delProductModal" ref="delProductModal" class="modal fade" tabindex="-1"
-           aria-labelledby="delProductModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content border-0">
-            <div class="modal-header bg-danger text-white">
-              <h5 id="delProductModalLabel" class="modal-title">
-                <span>刪除產品</span>
-              </h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              是否刪除
-              <strong class="text-danger"></strong> 商品(刪除後將無法恢復)。
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
-                取消
-              </button>
-              <button type="button" class="btn btn-danger"
-              @click="delData">
-                確認刪除
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- Modal -->
-    </div>
-
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.9.1/axios.min.js'
-            integrity='sha512-Xk3wWei2TGrsh9kDSBKUMIjw/86sLUvhtnv9f7fOuIwhhiUTKz8szkWkzHthrM5Bb3Bu9idSzkxOrkzhcneuiw=='
-            crossorigin='anonymous'></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"
-            integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG"
-            crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js"
-            integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc"
-            crossorigin="anonymous"></script>
-            <script type="module" src="./productapi.js"></script>
-
-  </body>
-
-</html>
+    `
+}
