@@ -29,7 +29,7 @@ const app = Vue.createApp({
                     name:'',
                     email:'',
                     tel:'',
-                    address:''
+                    address:'',
                 },
                 message:''
             },
